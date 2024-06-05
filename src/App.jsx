@@ -1,35 +1,48 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { useEffect, useState } from "react";
 
-function App() {
-  const [count, setCount] = useState(0)
+import Navbar from "./components/Navbar";
+import Services from "./components/Services";
+import Footer from "./components/Footer";
+import { Toaster } from "react-hot-toast";
+import About from "./components/About";
+import Contact from "./components/Contact";
+import CustomCursor from "./components/CustomCursor";
+import Skill from "./components/Skill";
+import Education from "./components/Educations";
+import Experience from "./components/Experience";
+import Home from "./components/Home";
+
+const App = () => {
+  const [theme, setTheme] = useState("dark");
+  useEffect(() => {
+    if (theme === "dark") {
+      document.documentElement.classList.add("dark");
+    } else {
+      document.documentElement.classList.remove("dark");
+    }
+  }, [theme]);
+  const handleSwitch = () => {
+    setTheme(theme === "dark" ? "light" : "dark");
+  };
 
   return (
     <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
-}
+      <CustomCursor></CustomCursor>
 
-export default App
+      <div className="dark:bg-black dark:text-white">
+        <Navbar theme={handleSwitch}></Navbar>
+        <Home></Home>
+        <About></About>
+        <Skill></Skill>
+        <Experience></Experience>
+        <Education></Education>
+        <Services></Services>
+        <Contact></Contact>
+        <Footer></Footer>
+      </div>
+      <Toaster position="top-center" reverseOrder={false} />
+    </>
+  );
+};
+
+export default App;
