@@ -8,4 +8,5 @@ export default defineConfig({
       src: "/src",
     },
   },
+  base: "sb-portfolio",
 });
