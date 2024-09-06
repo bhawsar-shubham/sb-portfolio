@@ -1,7 +1,7 @@
 export const experiences = [
   {
     id: 1,
-    img: "https://media.licdn.com/dms/image/D4D0BAQGsGR9p4ikS5w/company-logo_100_100/0/1708946550425/tata_consultancy_services_logo?e=1725494400&v=beta&t=rB--XDIgydiCyQwnFXKZx5ElGiuODlHRLGMcXvO2Z4M",
+    img: "https://media.licdn.com/dms/image/v2/D4D0BAQGsGR9p4ikS5w/company-logo_200_200/company-logo_200_200/0/1708946550425/tata_consultancy_services_logo?e=1733961600&v=beta&t=G0uMDAeWF5JRPJ1iPYC2LDv8s4ERLs70rBl22f_sZu8",
     role: "System Engineer",
     company: "Tata Consultancy Services",
     date: "January 2023 - Present",
@@ -11,7 +11,7 @@ export const experiences = [
   },
   {
     id: 2,
-    img: "https://media.licdn.com/dms/image/C510BAQFHOW2qhSf75Q/company-logo_200_200/0/1630568965368/47billion_logo?e=1725494400&v=beta&t=z9U6q941SmEsY11h9nuwRV3wZCvdpAvsbRn0qs6X_LU",
+    img: "https://media.licdn.com/dms/image/v2/C510BAQFHOW2qhSf75Q/company-logo_200_200/company-logo_200_200/0/1630568965368/47billion_logo?e=1733961600&v=beta&t=4NSJn4LnoTRPa9pFiyc98lBhB_t-1lftctVtfUMNYV0",
     role: "Software Engineer",
     company: "47Billion Information Technology",
     date: "June 2021 - December 2022",
@@ -21,7 +21,7 @@ export const experiences = [
   },
   {
     id: 3,
-    img: "https://media.licdn.com/dms/image/D4D0BAQEchGop6VD-kg/company-logo_200_200/0/1690878841072/gemsessence_infotech_pvt_ltd_logo?e=1725494400&v=beta&t=XaPXdcl7CGVzqMMDZIg_tYyjpAYLWMi0TXb4_E_2EX4",
+    img: "https://media.licdn.com/dms/image/v2/D4D0BAQEchGop6VD-kg/company-logo_100_100/company-logo_100_100/0/1690878841072/gemsessence_infotech_pvt_ltd_logo?e=1733961600&v=beta&t=AATYdXkW5khp2oADJnc-corfo8RXY_WM40GMDjg90S4",
     role: "Junior Software Engineer",
     company: "Gems Essence Infotech Pvt Ltd",
     date: "February 2021 - May 2021",
@@ -58,37 +58,39 @@ export const frontEnd = [
   },
   {
     id: 5,
-    name: "ReactJs",
+    name: "ReactJS",
     style: "border border-blue-500/60",
   },
   {
     id: 1,
-    name: "HTML",
-  },
-  {
-    id: 2,
-    name: "CSS",
-  },
-  {
-    id: 3,
     name: "TailWind",
     style: "border border-blue-500/60",
   },
   {
-    id: 6,
-    name: "Boottrap",
+    id: 2,
+    name: "Bootstrap",
     style: "border border-blue-400/60",
+  },
+  {
+    id: 3,
+    name: "HTML",
+    style: "border border-blue-500/60",
+  },
+  {
+    id: 6,
+    name: "CSS",
+    style: "border border-blue-500/60",
   },
 ];
 export const backEnd = [
   {
     id: 1,
-    name: "Nodjs",
+    name: "NodeJS",
     style: "border border-green-500/60",
   },
   {
     id: 2,
-    name: "Express",
+    name: "ExpressJS",
     style: "border border-gray-500/60",
   },
   {
@@ -100,7 +102,7 @@ export const backEnd = [
 export const dataBase = [
   {
     id: 1,
-    name: "MySql",
+    name: "MySQL",
     style: "border border-blue-500/60",
   },
   {
@@ -110,7 +112,7 @@ export const dataBase = [
   },
   {
     id: 4,
-    name: "Python",
+    name: "PostgreSQL",
     style: "border border-green-500/60",
   },
 ];
@@ -123,10 +125,12 @@ export const tools = [
   {
     id: 2,
     name: "Github",
+    style: "border border-gray-500/60",
   },
   {
     id: 2,
     name: "Jira",
+    style: "border border-red-600/60",
   },
   {
     id: 3,
