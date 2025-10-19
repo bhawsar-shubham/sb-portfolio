@@ -1,116 +1,99 @@
 import { useForm } from "react-hook-form";
-// import { collection, addDoc } from "firebase/firestore";
 import toast from "react-hot-toast";
 import { useState } from "react";
+import InputField from "../CommonInuptField";
+import TextAreaField from "../CommonTextAreaField";
 
 const Contact = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [message, setMessage] = useState("");
-  const [success, setSuccess] = useState(false);
+  const [timestamp, setTimestamp] = useState(null);
+
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm();
-  const onSubmit = async (e) => {
-    // e.preventDefault();
+
+  const onSubmit = async () => {
+    const currentTimestamp = new Date();
+    setTimestamp(currentTimestamp);
+  
+    // Generate a random ID
+    const randomId = `id-${Math.floor(Math.random() * 1000000)}`; // Adjust range if needed
+    console.log("Generated Random ID:", randomId);
+  
+    const formData = { id: randomId, name, email, message, timestamp: currentTimestamp };
+  
     try {
-      await addDoc(collection(db, "contacts"), {
-        name,
-        email,
-        message,
-        timestamp: new Date(),
+      const response = await fetch("http://localhost:5000/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formData),
       });
-      setSuccess(true);
-      setName("");
-      setEmail("");
-      setMessage("");
-      toast.success(
-        `Thank you for your message! ${name}  👏 I will get back to you soon`
-      );
+  
+      const result = await response.json();
+      if (result.success) {
+        toast.success(`Thank you for your message, ${name}! I will get back to you soon.`);
+        setName("");
+        setEmail("");
+        setMessage("");
+      } else {
+        throw new Error(result.message);
+      }
     } catch (error) {
-      console.error("Error adding document: ", error);
-      toast.error(`Something went wrong, Please try Again ${name} `);
+      console.error("Error:", error);
+      toast.error("Something went wrong. Please try again.");
     }
   };
+  
+  
+
   return (
-    <>
-      <div
-        name="Contact"
-        className="max-w-screen-2xl ontainer mx-auto px-4 md:px-20 my-10 "
-      >
-        <h2 className="text-3xl font-semibold mb-4 ">Contact Me</h2>
-        <div className="">
-          <form
-            method="POST"
-            onSubmit={handleSubmit(onSubmit)}
-            className="flex w-full flex-col  items-center gap-5 border bottom-1 p-3 shadow-sm"
-          >
-            <h2 className="text-2xl font-normal">Send me a Mesaage</h2>
-            <h4 className="text-xl font-mono">
-              I'am Very Responsive To Message{" "}
-            </h4>
-            <div className="w-full md:w-1/2 flex flex-col gap-2">
-              <input
-                {...register("name", { required: true })}
-                name="name"
-                value={name}
-                onChange={(e) => setName(e.target.value)}
-                className="w-full h-[50px] rounded-full leading-tight border border-black py-2 px-4 dark:bg-[#1c1b23]"
-                type="text"
-                placeholder="Name"
-              />
-              {errors.name && (
-                <span className="text-red-300 mx-4">
-                  This field is required
-                </span>
-              )}
-            </div>
-            <div className="w-full md:w-1/2 flex flex-col gap-2">
-              <input
-                {...register("email", { required: true })}
-                name="email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                className="w-full h-[50px] rounded-full border border-black py-2 px-4  dark:bg-[#1c1b23]"
-                type="email"
-                placeholder="Email"
-              />
-              {errors.email && (
-                <span className=" mx-4 text-red-300">
-                  This field is required
-                </span>
-              )}
-            </div>
-            <div className="w-full md:w-1/2 flex  flex-col gap-2">
-              <textarea
-                {...register("message", { required: true })}
-                name="message"
-                value={message}
-                onChange={(e) => setMessage(e.target.value)}
-                className="w-full h-[140px] rounded-md border border-black py-2 px-4  dark:bg-[#1c1b23]"
-                type="text "
-                placeholder="Enter Your Message"
-              />
-              {errors.message && (
-                <span className="mx-4 text-red-300">
-                  This field is required
-                </span>
-              )}
-            </div>
-            <div className="w-1/2 flex items-center justify-center">
-              <button
-                type="submit"
-                className="px-10 text-white font-medium py-3 bg-blue-400 outline-none hover:bg-blue-900 border  rounded-full"
-              >
-                Send
-              </button>
-            </div>
-          </form>
-        </div>
-      </div>
-    </>
+    <div className="max-w-screen-2xl container mx-auto px-4 md:px-20 my-10">
+      <h2 className="text-3xl font-semibold mb-4">Contact Me</h2>
+      <form className="flex flex-col items-center gap-5 border p-3 shadow-sm">
+        <h2 className="text-2xl font-normal">Send me a Message</h2>
+        <h4 className="text-xl font-mono">I am very responsive to messages</h4>
+
+        <InputField
+          name="name"
+          value={name}
+          onChange={(e) => setName(e.target.value)}
+          register={register}
+          errors={errors}
+          placeholder="Name"
+        />
+        <InputField
+          name="email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          register={register}
+          errors={errors}
+          type="email"
+          placeholder="Email"
+          required={true}
+        />
+        <TextAreaField
+          name="message"
+          value={message}
+          onChange={(e) => setMessage(e.target.value)}
+          register={register}
+          errors={errors}
+          placeholder="Enter Your Message"
+          required={true}
+        />
+
+        <button
+          type="button"
+          onClick={handleSubmit(onSubmit)}
+          className="px-10 py-3 text-white font-medium bg-blue-400 hover:bg-blue-900 rounded-full"
+        >
+          Send
+        </button>
+      </form>
+    </div>
   );
 };
 
