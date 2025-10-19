@@ -3,7 +3,7 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
-  "homepage": "https://bhawsar-shubham.github.io/sb-portfolio-dev",
+  "homepage": "https://bhawsar-shubham.github.io/sb-portfolio",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
