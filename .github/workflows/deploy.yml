@@ -1,9 +1,9 @@
-name: Deploy React App to GitHub Pages
+name: Deploy Vite React App to GitHub Pages
 
 on:
   push:
     branches:
-      - develop   # 👈 deploys automatically when you push to 'develop'
+      - develop   # or main if you want later
 
 permissions:
   contents: write
@@ -27,15 +27,16 @@ jobs:
           node-version: 18
 
       - name: Install dependencies
-        run: npm ci
+        run: npm install
 
-      - name: Build project
-        run: npm run build
+      - name: Build Vite project
+        run: |
+          CI=false npm run build
 
       - name: Upload build output
         uses: actions/upload-pages-artifact@v3
         with:
-          path: ./build
+          path: ./dist   # 👈 Vite builds into 'dist'
 
   deploy:
     needs: build
